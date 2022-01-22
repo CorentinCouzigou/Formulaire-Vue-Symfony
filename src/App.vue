@@ -4,7 +4,7 @@
     <Formulaire />
     <div class="wrapper">
       <TableOfData v-if="loaderToggle" v-bind:dataOfUsers="users" />
-      <div v-else class="loader"></div>
+      <div v-else class="loaderUsers"></div>
     </div>
   </div>
 </template>
