@@ -8,23 +8,25 @@
           border: '1px solid black',
         }"
       >
-        <th>Lastname</th>
-        <th>Firstname</th>
+        <th>id</th>
+        <th>Email</th>
+        <th>Password</th>
       </thead>
       <tbody>
         <tr
           :style="{ border: '1px solid black', 'text-align': 'center' }"
-          v-bind:key="user._id"
+          v-bind:key="user.id"
           v-for="user in dataOfUsers"
         >
+          <td>{{ user.id }}</td>
           <td
             :style="{
               'border-right': '1px solid black',
             }"
           >
-            {{ user.lastname }}
+            {{ user.email }}
           </td>
-          <td>{{ user.firstname }}</td>
+          <td>{{ user.password }}</td>
         </tr>
       </tbody>
     </table>
