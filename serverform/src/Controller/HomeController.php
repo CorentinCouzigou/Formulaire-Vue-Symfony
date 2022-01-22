@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home', methods: ['GET', 'POST'])]
+    #[Route('/', name: 'home')]
     
     public function index(ManagerRegistry $doctrine, UserRepository $UserRepository, NormalizerInterface $normalizer): Response
     {
