@@ -1,23 +1,38 @@
 <template>
-  <div>
+  <div class="container">
     <img alt="Vue logo" src="./assets/logo.png" />
     <Formulaire />
-    <TableOfData v-bind:dataOfUsers="users" />
+    <div class="wrapper">
+      <TableOfData v-if="loaderToggle" v-bind:dataOfUsers="users" />
+      <div v-else class="loader"></div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import Formulaire from "./components/Formulaire.vue";
 import TableOfData from "./components/TableOfData.vue";
+import { onBeforeMount, ref } from "vue";
 import axios from "axios";
 
-let users = [
-  { id: 0, email: "doe", password: "john" },
-  { id: 2, email: "Poutine", password: "Vladimir" },
-  { id: 3, email: "Poutine", password: "Vladimir" },
-];
-await axios.get("http://127.0.0.1:8000").then((r) => users.push(r.data));
-console.log(users);
+let loaderToggle = ref(false);
+console.log(loaderToggle.value);
+let users = ref([]);
+
+onBeforeMount(async () => {
+  await axios
+    .get("http://127.0.0.1:8000")
+    .then((r) => users.value.push(r.data));
+  console.log(users);
+  loaderToggle.value = true;
+});
 </script>
 
-<style scoped src="./App.css"></style>
+<style scoped src="./App.css">
+.hidden {
+  display: none;
+}
+.visible {
+  display: block;
+}
+</style>
