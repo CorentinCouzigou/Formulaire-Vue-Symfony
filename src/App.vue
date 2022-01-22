@@ -1,26 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <Formulaire />
+  <TableOfData v-bind:dataOfUsers="users" />
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import Formulaire from "./components/Formulaire.vue";
+import TableOfData from "./components/TableOfData.vue";
+// import axios from "axios";
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+let users = [
+  { _id: 1, lastname: "doe", firstname: "john" },
+  { _id: 2, lastname: "Poutine", firstname: "Vladimir" },
+];
+// const dataUsers = await axios
+//   .get("http://127.0.0.1:8000")
+//   .then((r) => console.log("response", r));
+// console.log("dataUsers", dataUsers);
+// users = dataUsers;
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style scoped src="./App.css"></style>

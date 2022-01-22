@@ -1,0 +1,14 @@
+.formulaire__container {
+  width: 15rem;
+  height: 20rem;
+  padding: 1rem;
+}
+.formulaire {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.formulaire label:nth-child(3) {
+  margin-top: 1rem;
+}
