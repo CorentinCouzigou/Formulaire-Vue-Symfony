@@ -8,18 +8,20 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home', methods: ['GET', 'POST'])]
     
-    public function index(ManagerRegistry $doctrine, UserRepository $UserRepository, NormaliserInterface $Normaliser): Response
+    public function index(ManagerRegistry $doctrine, UserRepository $UserRepository, NormalizerInterface $normalizer): Response
     {
         $usersList = $UserRepository->findAll();
-        $postNormaliser = $Normaliser->normalize($usersList);
-        $json = json_encode(postNormaliser);
-        dd($json);
-        dump('yo');
-        return $this->render('home/index.html.twig');
+        $postNormaliser = $normalizer->normalize($usersList);
+        dump($postNormaliser);
+        $json = json_encode($postNormaliser[0]);
+        dump($json);
+        $response  = new Response($json,200,["content-type" => "application/json"]);
+        return $response;
     }
 }
