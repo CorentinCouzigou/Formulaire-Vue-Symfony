@@ -18,7 +18,13 @@
           v-bind:key="user.id"
           v-for="user in dataOfUsers"
         >
-          <td>{{ user.id }}</td>
+          <td
+            :style="{
+              'border-right': '1px solid black',
+            }"
+          >
+            {{ user.id }}
+          </td>
           <td
             :style="{
               'border-right': '1px solid black',

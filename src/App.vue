@@ -17,12 +17,10 @@ import axios from "axios";
 
 let loaderToggle = ref(false);
 console.log(loaderToggle.value);
-let users = ref([]);
+let users = ref();
 
 onBeforeMount(async () => {
-  await axios
-    .get("http://127.0.0.1:8000")
-    .then((r) => users.value.push(r.data));
+  await axios.get("http://127.0.0.1:8000").then((r) => (users.value = r.data));
   console.log(users);
   loaderToggle.value = true;
 });

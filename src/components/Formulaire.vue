@@ -1,7 +1,7 @@
 <template>
   <div class="formulaire">
     <h1>Mon formulaire</h1>
-    <form class="formulaire">
+    <form class="formulaire" method="post" action="">
       <label for="Email">Votre Email</label>
       <input
         v-model="formData.email"
@@ -34,10 +34,15 @@
 </template>
 
 <script setup>
+import axios from "axios";
 let formData = { email: "", name: "", password: "" };
+
 function onSubmitForm() {
-  console.log("formdata", formData);
-  // let formData = { email: "", name: "", password: "" };
+  let jsonData = JSON.stringify(formData);
+  console.log("json", jsonData);
+  axios({ method: "post", url: "http://127.0.0.1:8000/", data: jsonData })
+    .catch((error) => console.log(error))
+    .then((r) => console.log("responsePost", r));
 }
 </script>
 
