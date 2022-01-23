@@ -44,10 +44,25 @@ class HomeController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
-
- 
-    
         $response  = new Response("Données bien reçues !",200);
+        return $response;
+    }
+
+    #[Route('/', name: 'home_deleteuser', methods:"DELETE")]
+
+    public function DeleteUsers(ManagerRegistry $doctrine, UserRepository $UserRepository,Request $request): Response
+    {   
+        
+        $request = new Request();
+        $data = json_decode($request->getContent());
+        // dump($data);
+        $userSelected = $UserRepository->findOneBy(['id'=> $data]);
+        dump($userSelected);
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($userSelected);
+        $entityManager->flush();
+       
+        $response  = new Response("Demande de suppression uitlisateur bien reçue !",200);
         return $response;
     }
 }
