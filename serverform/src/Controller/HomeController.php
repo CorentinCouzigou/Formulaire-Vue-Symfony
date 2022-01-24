@@ -28,7 +28,7 @@ class HomeController extends AbstractController
         // transformation en format JSON pour l'exportation au front.
         $json = json_encode($DataNormalise);
         // console.log symfony
-        dump($json);
+        // dump($json);
         // réponse au front avec les données, les données et le format des données.
         $response  = new Response($json,200,["content-type" => "application/json"]);
         return $response;
@@ -43,9 +43,11 @@ class HomeController extends AbstractController
         $request = new Request();
         // transformation de ce json en objet.
         $data = json_decode($request->getContent());
+        dump($data);
         // utilisation du modele de user.
         $user = new User();
         // j'utilise les setter pour définir mes informations.
+        $user->setEmail($data->email);
         $user->setPassword($data->password);
         dump($user);
         // utilisation de notre ORM pour permettre l'insertion des données dans notre BDD.
@@ -71,6 +73,27 @@ class HomeController extends AbstractController
         // utilisation doctrine notre ORM pour remove notre user dans notre BDD.
         $entityManager = $doctrine->getManager();
         $entityManager->remove($userSelected);
+        // flush lance l'action.
+        $entityManager->flush();
+       
+        // réponse front
+        $response  = new Response("Demande de suppression d'un utilisateur bien reçue !",200);
+        return $response;
+    }
+
+    #[Route('/', name: 'home_upDateuser', methods:"PATCH")]
+
+    public function updateUsers(ManagerRegistry $doctrine, UserRepository $UserRepository,Request $request): Response
+    {   
+        
+        $request = new Request();
+        $data = json_decode($request->getContent());
+        dump($data);
+        $userSelected = $UserRepository->findOneBy(['id'=> $data]);
+        dump($userSelected);
+        // utilisation doctrine notre ORM pour remove notre user dans notre BDD.
+        $entityManager = $doctrine->getManager();
+        $entityManager->merge($userSelected);
         // flush lance l'action.
         $entityManager->flush();
        

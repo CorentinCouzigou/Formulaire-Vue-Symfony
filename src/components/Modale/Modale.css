@@ -22,11 +22,19 @@
 .modal__contain {
   padding: 1rem;
   width: 30rem;
-  height: 10rem;
+  height: 15rem;
   background: #fff;
   border-radius: 2rem;
   z-index: 1;
   position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.modal__formulaire {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 .modal__close {
   background: none;
@@ -36,5 +44,4 @@
   right: 1rem;
   color: red;
   cursor: pointer;
-
 }

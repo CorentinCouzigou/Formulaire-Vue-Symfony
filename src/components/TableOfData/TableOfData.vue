@@ -55,8 +55,7 @@
               type="button"
               v-bind:id="user.id"
               v-on:click="
-                handleDeleteUser(user.id, user.email, user.password);
-                handleToggleModale();
+                handleDeleteUser(user.id);
               "
             >
               <svg
