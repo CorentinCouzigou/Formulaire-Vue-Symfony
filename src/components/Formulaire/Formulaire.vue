@@ -10,14 +10,7 @@
         id="email"
         class="form-control"
       />
-      <label for="name">Votre nom</label>
-      <input
-        v-model="formData.name"
-        type="text"
-        placeholder="name"
-        id="firstname"
-        class="form-control"
-      />
+
       <label for="MDP">Votre mot de passe</label>
       <input
         v-model="formData.password"
@@ -34,12 +27,15 @@
 </template>
 
 <script setup>
+// utilisation d'axios pour l'envoi des datas au back
 import axios from "axios";
-let formData = { email: "", name: "", password: "" };
+let formData = { email: "", password: "" };
 
 function onSubmitForm() {
+  // transformation en json de mes data
   let jsonData = JSON.stringify(formData);
   console.log("json", jsonData);
+  // utilisation d'axios 
   axios({ method: "post", url: "http://127.0.0.1:8000/", data: jsonData })
     .catch((error) => console.log(error))
     .then((r) => console.log("responsePost", r));
